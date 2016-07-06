@@ -1,0 +1,197 @@
+<template name="layout">
+	{{>yield}}
+</template>
+
+<template name="auth">
+
+{{#if user}}
+
+	{{>loggedIn user=user}}
+
+
+{{else}}
+	<div id="loading">
+	<div class="icon">
+		<i class="ion-load-c"></i>
+	</div>
+	<span>matching spin with retro thrusters</span><br><span class="xsmall">(getting data from instagram)</span>
+		
+	</div>
+
+{{/if}}
+</template>
+
+<template name="loggedIn">
+
+{{#if showFriendFeed}}
+	{{>friendFeed}}
+{{/if}}
+
+	<div id="home">
+
+		{{#if friends}}	
+
+		{{>selectFriendHeader}}
+		{{/if}}
+		
+		<div class="list scrollable">
+
+		{{#if friends}}		
+			<div class="table">
+				{{#each friends}}
+				<div id="{{id}}" class="row friend">
+					<div class="cell img">
+						<div class="circle" style="background: url({{profile_picture}}); background-size: 60px 60px;">
+						</div>
+
+
+					</div>
+					<div class="cell name">
+						{{username}}
+					</div>
+				</div>
+				{{/each}}
+			</div>
+
+
+			{{#if canLoadMore}}
+			<div id="loadMore">
+				load more
+			</div>
+			{{/if}}
+
+		{{else}}
+			{{>friendsLoading user=user}}
+		{{/if}}
+		</div>
+	</div>
+</template>
+
+<template name="selectFriendHeader">
+	<div id="selectFriendHeader" class="header">
+		Select a Person
+	</div>
+</template>
+
+<template name="friendsLoading">
+	<div class="friendsLoading" id="loading">
+	<!-- <div class="title"></div> -->
+	<span class="medium">Welcome, {{user.username}}!</span>
+
+	<div class="icon">
+		<i class="ion-load-c"></i>
+	</div>
+
+	<span class="xsmall">We're all hooked up! Downloading your follow list</span>
+		
+	</div>
+</template>
+
+
+
+
+<template name="friendFeed">
+	<div id="friendPopUp" class="popUp">
+		{{>loadingFriendFeed friend=friend relations=relations}}
+
+		{{#if relations}}
+			{{>friendHeader friend=friend}}		
+
+			<div id="finalFeed" class="scrollable">
+				{{>finalFeed}}	
+			</div>
+			
+		{{/if}}
+	</div>
+</template>
+
+<template name="friendHeader">
+	<div id="friendHeader">
+		<div class="container">
+			
+			<div class="close">
+				<i class="ion-close"></i>
+			</div>
+
+			{{friend.username}}'s feed
+		</div>
+	</div>	
+</template>
+
+<template name="finalFeed">
+<div class="mediaContainer ">
+
+<div class="announcement">
+	Tap on an image to open it in Instagram
+</div>
+<!-- {{#if Template.subscriptionsReady}}
+ -->	
+ 	{{#each feed}}
+		{{>feedItem link=link images=images user=user created_time=created_time}}
+
+	{{/each}}
+
+
+	<div class="loadMore" >
+		load more
+	</div>
+<!-- {{else}}
+	<div id="loading">
+	<div class="icon">
+		<i class="ion-load-c"></i>
+	</div>
+	<span>downloading data</span>
+		
+	</div>
+	
+{{/if}} -->
+
+		
+</div>
+
+</template>
+<template name="feedItem">
+	<div class="media">
+		<a href="{{link}}" target="_blank"><img src="{{images.low_resolution.url}}" /> </a>
+<!-- 		<p>{{user.username}}
+		<br>
+		{{unixTime created_time}}</p> -->
+	
+ 	</div>
+</template>
+
+
+<template name="loadingFriendFeed">
+
+	<div id="friendPreview" class="table">
+		<div class="row">
+			<div class="cell pic">
+				<div class="circle friendPreviews" style="background: url({{friend.profile_picture}}); background-size: 150px 150px;">
+				</div>
+
+
+				<div class="friendStatus">
+					<div class="icon {{#unless relations}}loading{{/unless}}">
+						<i class="{{#if relations}}ion-checkmark{{else}}ion-load-c{{/if}}"></i>
+					</div>
+					<span>loading follow list</span>
+				</div>
+
+				
+				<div class="friendStatus">
+					<div class="icon {{#if relations}}loading{{/if}}">
+						<i class="{{#if relations}}ion-load-c{{else}}ion-close{{/if}}"></i>
+					</div>
+					<span>building feed</span>
+				</div>
+
+				<div id="noData" class="name">
+					<span class="xsmall">{{#unless relations}}This might take some time if {{friend.username}} has a big follow list. Refresh if it takes WAY, WAYY too long{{else}}If building the feed takes WAY, WAYY too long, and you've refreshed multiple times, it might just mean {{friend.username}} is not following anyone with a publicly available feed{{/unless}}
+					</span>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</template>
+

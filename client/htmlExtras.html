@@ -1,0 +1,101 @@
+
+<template name="login">
+
+<div id="login">
+
+	<div class="table fullPage">
+		<div class="row">
+			<div class="cell">
+		 		<h1 id="headerName">
+		 			insta<b>creep</b>
+		 		</h1>
+
+
+				<a href="https://instagram.com/oauth/authorize/?client_id=13ba4fcfec5c478ca359e5900eca7882&redirect_uri={{#if devMode}}http://localhost:3000/auth/{{else}}https://instacreep.meteor.com/auth/{{/if}}&response_type=token">
+				<div id="loginButton" class="table button">
+					<div class="row">
+						<div class="cell text">
+							Start
+						</div>
+					</div>
+				</div>
+				</a>
+
+				<div class="table" id="notes">
+					<div class="row">
+						<div class="cell number">
+							<div class="circle">
+								1
+							</div>							
+						</div>
+						<div class="cell text">
+							Browse as someone else. It's like you're looking over their shoulder while they're on Instagram
+						</div>
+					</div>
+					<div class="row">
+						<div class="cell number">
+							<div class="circle">
+								2
+							</div>							
+						</div>
+						<div class="cell text">
+							Blazing fast. I hope. If not, I apologize.
+						</div>
+					</div>
+					<div class="row">
+						<div class="cell number">
+							<div class="circle">
+								3
+							</div>							
+						</div>
+						<div class="cell text">
+							If it stops letting you sign in, you've exceeded usage limits for the hour
+						</div>
+					</div>
+					<div class="row">
+						<div class="cell number">
+							<div class="circle">
+								4
+							</div>							
+						</div>
+						<div class="cell text">
+							The purpose is to allow for better exploration of content. The name is the most obvious implication of allowing such discovery.
+						</div>
+					</div>
+				</div>
+
+
+				<div id="dev">
+					<a href="http://instagram.com/dddeev" target="_blank">
+					<div class="table">
+						<div class="row">
+							<div class="cell icon">
+								<i class="ion-social-instagram"></i>
+							</div>
+							<div class="cell text">
+								dddeev
+							</div>
+						</div>
+					</div>
+					</a>
+				</div>				
+			</div>				
+		</div>
+	
+	</div>
+	
+</div>
+
+
+</template>
+
+
+<template name="loading">
+	<div id="loading">
+	<div class="icon">
+		<i class="ion-load-c"></i>
+	</div>
+		
+	</div>
+	
+</template>
